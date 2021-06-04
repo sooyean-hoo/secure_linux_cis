@@ -27,4 +27,26 @@ class secure_linux_cis::rules::ensure_permissions_on_etc_motd_are_configured {
       mode    => '0644',
       content => $motd_real,
     }
+
+
+  unless $secure_linux_cis::motd {
+    notify{ 'ensure_permissions_on_etc_motd_are_configured motd':
+      message => "secure_linux_cis::motd=${secure_linux_cis::motd}=",
+    }
+  }else{
+    notify{ 'ensure_permissions_on_etc_motd_are_configured motd':
+      message => 'secure_linux_cis::motd=undef',
+    }
+  }
+
+  unless $secure_linux_cis::banner {
+    notify{ 'ensure_permissions_on_etc_motd_are_configured motd banner':
+      message => "secure_linux_cis::banner=${secure_linux_cis::banner}=",
+    }
+  }else{
+    notify{ 'ensure_permissions_on_etc_motd_are_configured motd banner':
+      message => 'secure_linux_cis::banner=undef',
+    }
+  }
+
 }
