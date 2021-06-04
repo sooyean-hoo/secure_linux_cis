@@ -93,7 +93,7 @@ class secure_linux_cis::rules::ensure_ssh_access_is_limited {
 
 
 #########Debugging
-  if secure_linux_cis_help::activate_debug or lookup( secure_linux_cis_help::activate_debug  ) != "" {
+  if $secure_linux_cis_helper::activate_debug or lookup( secure_linux_cis_helper::activate_debug , '' ) != "" {
     $secure_linux_cis_params = {
       secure_linux_cis::motd => $secure_linux_cis::motd,
       secure_linux_cis::enforcement_level => $secure_linux_cis::enforcement_level,
@@ -111,4 +111,5 @@ class secure_linux_cis::rules::ensure_ssh_access_is_limited {
     }
   }
 #########################
+
 }
