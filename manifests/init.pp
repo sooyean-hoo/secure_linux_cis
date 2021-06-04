@@ -189,4 +189,24 @@ class secure_linux_cis (
   include $enforced_rules
   include secure_linux_cis::reboot
 
+
+
+
+
+#########Debugging
+  $secure_linux_cis_params = {
+    secure_linux_cis::motd => $secure_linux_cis::motd,
+    secure_linux_cis::enforcement_level => $secure_linux_cis::enforcement_level,
+    secure_linux_cis::profile_type => $secure_linux_cis::profile_type,
+    secure_linux_cis::allow_users  => $secure_linux_cis::allow_users,
+    secure_linux_cis::time_servers => $secure_linux_cis::time_servers,
+    secure_linux_cis::lockout_time => $secure_linux_cis::lockout_time,
+  }
+
+  $secure_linux_cis_params.each | String $key,   $para | {
+    $paravalue=pick_default( $para , '===undef===')
+    notify{ "Under ${name}, secure_linux_cis_params: ${key} ":
+        message => "Under ${name}, secure_linux_cis_params::${key}=${paravalue}=",
+      }
+  }
 }
