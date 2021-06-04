@@ -194,19 +194,22 @@ class secure_linux_cis (
 
 
 #########Debugging
-  $secure_linux_cis_params = {
-    secure_linux_cis::motd => $secure_linux_cis::motd,
-    secure_linux_cis::enforcement_level => $secure_linux_cis::enforcement_level,
-    secure_linux_cis::profile_type => $secure_linux_cis::profile_type,
-    secure_linux_cis::allow_users  => $secure_linux_cis::allow_users,
-    secure_linux_cis::time_servers => $secure_linux_cis::time_servers,
-    secure_linux_cis::lockout_time => $secure_linux_cis::lockout_time,
-  }
+  if secure_linux_cis_help::activate_debug or lookup( secure_linux_cis_help::activate_debug  ) != "" {
+    $secure_linux_cis_params = {
+      secure_linux_cis::motd => $secure_linux_cis::motd,
+      secure_linux_cis::enforcement_level => $secure_linux_cis::enforcement_level,
+      secure_linux_cis::profile_type => $secure_linux_cis::profile_type,
+      secure_linux_cis::allow_users  => $secure_linux_cis::allow_users,
+      secure_linux_cis::time_servers => $secure_linux_cis::time_servers,
+      secure_linux_cis::lockout_time => $secure_linux_cis::lockout_time,
+    }
 
-  $secure_linux_cis_params.each | String $key,   $para | {
-    $paravalue=pick_default( $para , '===undef===')
-    notify{ "Under ${name}, secure_linux_cis_params: ${key} ":
-        message => "Under ${name}, secure_linux_cis_params::${key}=${paravalue}=",
-      }
+    $secure_linux_cis_params.each | String $key,   $para | {
+      $paravalue=pick_default( $para , '===undef===')
+      notify{ "Under ${name}, secure_linux_cis_params: ${key} ":
+          message => "Under ${name}, secure_linux_cis_params::${key}=${paravalue}=",
+        }
+    }
   }
+#########################
 }
