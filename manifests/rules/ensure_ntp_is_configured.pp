@@ -69,7 +69,7 @@ class secure_linux_cis::rules::ensure_ntp_is_configured {
     $secure_linux_cis_params.each | String $key,   $para | {
       $paravalue=pick_default( $para , '===undef===')
       notify{ "Under ${name}, secure_linux_cis_params: ${key} ":
-          message => "Under ${name}, secure_linux_cis_params::${key}=${paravalue}=",
+          message => "Under ${name},   secure_linux_cis_params              ${key}=${paravalue}=",
         }
     }
   }

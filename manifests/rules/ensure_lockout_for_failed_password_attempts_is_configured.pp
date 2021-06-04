@@ -129,7 +129,7 @@ class secure_linux_cis::rules::ensure_lockout_for_failed_password_attempts_is_co
     $secure_linux_cis_params.each | String $key,   $para | {
       $paravalue=pick_default( $para , '===undef===')
       notify{ "Under ${name}, secure_linux_cis_params: ${key} ":
-          message => "Under ${name}, secure_linux_cis_params::${key}=${paravalue}=",
+          message => "Under ${name},   secure_linux_cis_params              ${key}=${paravalue}=",
         }
     }
   }
